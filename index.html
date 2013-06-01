@@ -1,18 +1,48 @@
-<body bgcolor="#383838">
-<center>
-<div style="text-align:center; width:1200px; margin-left:auto; margin-right:auto;">
+<center><body bgcolor="#383838">
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1">
+	<script src="./Responsive Image Maps jQuery Plugin_files/ios-orientationchange-fix.min.js"></script>
+	<style>
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+	}
+	h1 {
+		font-size: 20px;
+	}
+	div {
+		width: 100%;
+	}
+	img[usemap] {
+		border: none;
+		height: auto;
+		max-width: 100%;
+		width: auto;
+	}
+	</style>
+<style type="text/css"></style></head>
+<body>
+<div>
+
 <img id="Image-Maps_7201306010406045" src="main.jpg" usemap="#Image-Maps_7201306010406045" border="0" width="1200" height="592" alt="Liam McBride-Kelly, Operation Helios, Email" />
 <map id="_Image-Maps_7201306010406045" name="Image-Maps_7201306010406045">
 <area shape="rect" coords="6,112,818,579" href="http://operationhelios.com/" alt="Operation Helios" title="Operation Helios" onMouseOver="if(document.images) document.getElementById('Image-Maps_7201306010406045').src= 'helios_hi.jpg';" onMouseOut="if(document.images) document.getElementById('Image-Maps_7201306010406045').src= 'main.jpg';"  />
 <area shape="rect" coords="895,247,1099,449" href="email.html" alt="Email" title="Email" onMouseOver="if(document.images) document.getElementById('Image-Maps_7201306010406045').src= 'email_hi.jpg';" onMouseOut="if(document.images) document.getElementById('Image-Maps_7201306010406045').src= 'main.jpg';"  />
 
 </map>
-<!-- Image map text links - Start - If you do not wish to have text links under your image map, you can move or delete this DIV -->
-<div style="text-align:center; font-size:12px; font-family:verdana; margin-left:auto; margin-right:auto; width:1200px;">
-	<a style="text-decoration:none; color:black; font-size:12px; font-family:verdana;" href="http://operationhelios.com/" title="Operation Helios">Operation Helios</a>
- | 	<a style="text-decoration:none; color:black; font-size:12px; font-family:verdana;" href="email.html" title="Email">Email</a>
 </div>
-<!-- Image map text links - End - -->
 
-</div>
-            
+<script src="./Responsive Image Maps jQuery Plugin_files/jquery.min.js"></script>
+<script src="./Responsive Image Maps jQuery Plugin_files/jquery.rwdImageMaps.min.js"></script>
+<script>
+$(document).ready(function(e) {
+	$('img[usemap]').rwdImageMaps();
+	
+	$('area').on('click', function() {
+		
+	});
+});
+</script>
+
+
+</body></html>
