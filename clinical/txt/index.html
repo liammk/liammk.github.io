@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editable Image Form</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #container {
+            width: 210mm;
+            height: 297mm;
+            position: relative;
+            margin: 0 auto;
+            page-break-after: always;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* This ensures the image fits within the container without distortion */
+        }
+        .editable-text {
+            position: absolute;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            outline: none;
+            min-width: 20px;
+            min-height: 20px;
+            line-height: 1.23; /* Adjust this value as needed for line spacing */
+            white-space: pre-wrap; /* Ensures that line breaks are respected */
+        }
+        @media print {
+            body, html {
+                width: 210mm;
+                height: 297mm;
+            }
+            #container {
+                page-break-before: always;
+                page-break-inside: avoid;
+                page-break-after: avoid;
+            }
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .editable-text {
+                border: none;
+                overflow: visible;
+                word-wrap: break-word;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="container" onclick="placeInput(event)">
+    <img src="1.png" alt="Form Image"/>
+</div>
+
+<button onclick="printPage()">Print</button>
+
+<script>
+function placeInput(event) {
+    if (event.target.className === "editable-text") return; // Skip if clicking on an existing editable text
+
+    const container = document.getElementById('container');
+    const x = event.pageX - container.offsetLeft;
+    const y = event.pageY - container.offsetTop;
+
+    const span = document.createElement("span");
+    span.contentEditable = true;
+    span.classList.add("editable-text");
+    span.style.left = `${x}px`;
+    span.style.top = `${y}px`;
+    container.appendChild(span);
+    span.focus();
+
+    span.onblur = function() {
+        if (!span.innerText.trim()) {
+            span.remove();
+        }
+    };
+
+    span.onkeydown = function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.execCommand('insertHTML', false, '<br><br>');
+        }
+    };
+}
+
+function printPage() {
+    document.querySelectorAll('.editable-text').forEach(function(span) {
+        span.removeAttribute('contenteditable');
+    });
+    window.print();
+    document.querySelectorAll('.editable-text').forEach(function(span) {
+        span.setAttribute('contenteditable', true);
+    });
+}
+</script>
+
+</body>
+</html>
