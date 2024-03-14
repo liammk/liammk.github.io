@@ -129,7 +129,35 @@ function placeInput(event) {
     createTextBox(x, y);
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const container = document.getElementById('container');
+    const initialX = 165; // Specify the initial X coordinate
+    const initialY = 235; // Specify the initial Y coordinate
 
+    // Create the editable span
+    const span = document.createElement("span");
+    span.contentEditable = true;
+    span.classList.add("editable-text");
+    span.style.left = `${initialX}px`;
+    span.style.top = `${initialY}px`;
+    container.appendChild(span);
+    span.focus();
+
+    // Handle blur event to remove if empty or finalize text
+    span.addEventListener("blur", function() {
+        if (!span.innerText.trim()) {
+            span.remove(); // Remove span if it's empty
+        }
+    });
+
+    // Handle keydown events for line breaks and preventing new lines
+    span.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent default Enter behavior
+            document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
+        }
+    });
+});
 
 
 function printPage() {
