@@ -64,49 +64,72 @@
 
 <script>
 function placeInput(event) {
-    if (event.target.className === "editable-text") return; // Skip if clicking on an existing editable text
-
     const container = document.getElementById('container');
 
-    // Calculate position relative to the container
+    // Track whether the user has started typing
+    let isTyping = false;
+
+    // Function to create a new editable text box
+    function createTextBox(x, y) {
+        const span = document.createElement("span");
+        span.contentEditable = true;
+        span.classList.add("editable-text");
+        span.style.left = `${x}px`;
+        span.style.top = `${y}px`;
+        container.appendChild(span);
+        span.focus();
+
+        // Once the user starts typing, allow arrow keys for cursor navigation
+        span.addEventListener("input", function() {
+            isTyping = true;
+        }, { once: true });
+
+        // Remove the span if it's empty on blur
+        span.addEventListener("blur", function() {
+            if (!span.innerText.trim()) {
+                span.remove();
+            }
+        });
+
+        // Handle arrow key navigation
+        span.addEventListener("keydown", function(event) {
+            if (isTyping) {
+                return; // Allow default behavior for typing
+            }
+
+            switch (event.key) {
+                case "ArrowLeft":
+                    span.style.left = `${parseFloat(span.style.left) - 1}px`;
+                    break;
+                case "ArrowRight":
+                    span.style.left = `${parseFloat(span.style.left) + 1}px`;
+                    break;
+                case "ArrowUp":
+                    span.style.top = `${parseFloat(span.style.top) - 1}px`;
+                    break;
+                case "ArrowDown":
+                    span.style.top = `${parseFloat(span.style.top) + 1}px`;
+                    break;
+            }
+        });
+    }
+
+    // If clicking outside an existing editable text, reset typing flag
+    if (event.target.className !== "editable-text") {
+        isTyping = false;
+    }
+
+    // Create a new editable text box
     const x = event.pageX - container.offsetLeft;
     let y = event.pageY - container.offsetTop;
-
-    // Assuming an average line height of about 20px. Adjust as needed.
     const lineHeightApprox = 20;
-
-    // Shift the y position up by the approximate line height
     y -= lineHeightApprox;
-
-    // Prevent the y position from being negative
     if (y < 0) y = 0;
 
-    // Create the editable span
-    const span = document.createElement("span");
-    span.contentEditable = true;
-    span.classList.add("editable-text");
-    span.style.left = `${x}px`;
-    span.style.top = `${y}px`;
-
-    // Append and focus on the new span
-    container.appendChild(span);
-    span.focus();
-
-    // Blur event to remove if empty or finalize text
-    span.onblur = function() {
-        if (!span.innerText.trim()) {
-            span.remove(); // Remove span if it's empty
-        }
-    };
-
-    // Handle keydown events for line breaks and preventing new lines
-    span.onkeydown = function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault(); // Prevent default Enter behavior
-            document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
-        }
-    };
+    createTextBox(x, y);
 }
+
+
 
 
 function printPage() {
