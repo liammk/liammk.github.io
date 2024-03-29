@@ -32,6 +32,22 @@
             line-height: 1.23; /* Adjust this value as needed for line spacing */
             white-space: pre-wrap; /* Ensures that line breaks are respected */
         }
+        .editable-text:hover {
+            color: red;
+        }
+        .edit-button {
+            display: none;
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background-color: white;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .editable-text:hover .edit-button {
+            display: block;
+        }
         @media print {
             body, html {
                 width: 210mm;
@@ -50,6 +66,9 @@
                 border: none;
                 overflow: visible;
                 word-wrap: break-word;
+            }
+            .edit-button {
+                display: none;
             }
         }
     </style>
@@ -112,6 +131,12 @@ function placeInput(event) {
                     break;
             }
         });
+
+        // Add click event listener for editing existing text
+        span.addEventListener("click", function(event) {
+            event.stopPropagation(); // Prevent the click event from reaching the container
+            isTyping = true;
+        });
     }
 
     // If clicking outside an existing editable text, reset typing flag
@@ -157,8 +182,22 @@ document.addEventListener("DOMContentLoaded", function() {
             document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
         }
     });
+
+    // Add click event listener for editing existing text
+    span.addEventListener("click", function() {
+        isTyping = true;
+        span.contentEditable = true;
+        span.focus();
+    });
+
+
+
 });
 
+function editExistingText(span) {
+    span.contentEditable = true;
+    span.focus();
+}
 
 function printPage() {
     document.querySelectorAll('.editable-text').forEach(function(span) {
