@@ -29,8 +29,10 @@
             outline: none;
             min-width: 20px;
             min-height: 20px;
+            max-width: calc(100% - 220px); /* Set max width to prevent overflow into margin */
             line-height: 1.23; /* Adjust this value as needed for line spacing */
             white-space: pre-wrap; /* Ensures that line breaks are respected */
+            word-wrap: break-word; /* Ensures words break to a new line to fit within the max-width */
             font-family: Courier New, monospace;
         }
         .editable-text:hover {
@@ -155,30 +157,35 @@ function placeInput(event) {
     createTextBox(x, y);
 }
 
+function getCurrentDateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
+    const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    return `${date}\n${time}`;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.getElementById('container');
-    const initialX = 165; // Specify the initial X coordinate
-    const initialY = 235; // Specify the initial Y coordinate
 
-    // Create the editable span
-    const span = document.createElement("span");
-    span.contentEditable = true;
-    span.classList.add("editable-text");
-    span.style.left = `${initialX}px`;
-    span.style.top = `${initialY}px`;
-    span.innerText = "LIAM MCBRIDE KELLY  - GEN SURG 3 INTERN - Text page via spok #1496 "; // Set the initial text
-    container.appendChild(span);
-    span.focus();
+    // Create the editable span for the current date and time
+    const dateTimeSpan = document.createElement("span");
+    dateTimeSpan.contentEditable = true;
+    dateTimeSpan.classList.add("editable-text");
+    dateTimeSpan.style.left = `70px`;
+    dateTimeSpan.style.top = `235px`;
+    dateTimeSpan.innerText = getCurrentDateTime(); // Set the initial text
+    container.appendChild(dateTimeSpan);
+    dateTimeSpan.focus();
 
     // Handle blur event to remove if empty or finalize text
-    span.addEventListener("blur", function() {
-        if (!span.innerText.trim()) {
-            span.remove(); // Remove span if it's empty
+    dateTimeSpan.addEventListener("blur", function() {
+        if (!dateTimeSpan.innerText.trim()) {
+            dateTimeSpan.remove(); // Remove span if it's empty
         }
     });
 
     // Handle keydown events for line breaks and preventing new lines
-    span.addEventListener("keydown", function(event) {
+    dateTimeSpan.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             event.preventDefault(); // Prevent default Enter behavior
             document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
@@ -186,14 +193,43 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Add click event listener for editing existing text
-    span.addEventListener("click", function() {
+    dateTimeSpan.addEventListener("click", function() {
         isTyping = true;
-        span.contentEditable = true;
-        span.focus();
+        dateTimeSpan.contentEditable = true;
+        dateTimeSpan.focus();
     });
 
+    // Create the editable span for the "LIAM MCBRIDE KELLY  - GEN SURG 3 INTERN - PAGER #1496" text
+    const liamSpan = document.createElement("span");
+    liamSpan.contentEditable = true;
+    liamSpan.classList.add("editable-text");
+    liamSpan.style.left = `165px`;
+    liamSpan.style.top = `235px`;
+    liamSpan.innerText = "LIAM MCBRIDE KELLY  - GEN SURG 3 INTERN - PAGER #1496"; // Set the initial text
+    container.appendChild(liamSpan);
+    liamSpan.focus();
 
+    // Handle blur event to remove if empty or finalize text
+    liamSpan.addEventListener("blur", function() {
+        if (!liamSpan.innerText.trim()) {
+            liamSpan.remove(); // Remove span if it's empty
+        }
+    });
 
+    // Handle keydown events for line breaks and preventing new lines
+    liamSpan.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent default Enter behavior
+            document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
+        }
+    });
+
+    // Add click event listener for editing existing text
+    liamSpan.addEventListener("click", function() {
+        isTyping = true;
+        liamSpan.contentEditable = true;
+        liamSpan.focus();
+    });
 });
 
 function editExistingText(span) {
