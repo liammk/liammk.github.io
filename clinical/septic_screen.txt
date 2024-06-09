@@ -1,0 +1,41 @@
+SEPTIC SCREEN
+==PC/HOPC==
+Subjective fevers, N/V, sweats, rigors
+Pain
+RESP: cough, dyspnoea, haemoptysis
+CV: Chest pain
+GI:  abdo pain, diarrhoea
+HEPATIC: jaundice, RUQ pain
+URINARU: dysuria, frequency, haematuria, urethral discharge
+CNS: headache, photophobia, confusion
+MKS: joint pain/swelling
+SKIN: rash, erythema, wounds
+==PMH==
+Recent infections
+Mechanical valves, stents, etc
+==SOCIAL==
+Recent travel
+Sick contacts
+IVDU
+Sex
+==OE==
+OBSERVATIONS:
+A: own
+B: RR=     Auscultate chest=                SaO2=
+C: Cap refill=    Pulse=   Skin warmth=  BP =   heart sounds = 
+     fluid balance chart review
+D: AVPU = 
+E: Temp =      Abdo exam=        Skin/wound exam = 
+==IX==
+WCC
+CRP
+==PLAN==
+1) BC, VBG, FBC, CRP -> please page with lactate result from VBG
+2) Respiratory swap for COVID, Flu A/B, RSV
+3) Sputum for MCS
+4) CXR
+5) Urine dipstick and MCS -> please document dipstick results in notes
+6) Strict fluid balance – please insert IDC if unable to have patient urinate in containers
+7) IV fluids
+8) Antibiotics
+9) Oxygen targeting SaO2>94%
