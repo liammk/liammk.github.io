@@ -1,7 +1,7 @@
 SEPTIC SCREEN
 ==PC/HOPC==
-Subjective fevers, N/V, sweats, rigors
-Pain
+FEVERS (sOcrATES): 
+ASSOCIATED SX: pain, nausea, vomiting, sweats, rigors
 RESP: cough, dyspnoea, haemoptysis
 CV: Chest pain
 GI:  abdo pain, diarrhoea
@@ -10,9 +10,10 @@ URINARU: dysuria, frequency, haematuria, urethral discharge
 CNS: headache, photophobia, confusion
 MKS: joint pain/swelling
 SKIN: rash, erythema, wounds
+
 ==PMH==
-Recent infections
-Mechanical valves, stents, etc
+RECENT INFECTIONS: recent infections
+IMPLANTS: mechanical valves, stents, ortho implants 
 ==SOCIAL==
 Recent travel
 Sick contacts
@@ -21,11 +22,10 @@ Sex
 ==OE==
 OBSERVATIONS:
 A: own
-B: RR=     Auscultate chest=                SaO2=
-C: Cap refill=    Pulse=   Skin warmth=  BP =   heart sounds = 
-     fluid balance chart review
+B: RR=; Auscultate chest=; SaO2=
+C: Cap refill=; Pulse=; Skin warmth=; BP =; heart sounds =; Fluid balance chart review=;
 D: AVPU = 
-E: Temp =      Abdo exam=        Skin/wound exam = 
+E: Temp=; Abdo exam=; Skin/wound exam=;  
 ==IX==
 WCC
 CRP
