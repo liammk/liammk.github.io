@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /interview/
+Disallow: /ow/
+Disallow: /clinical/
