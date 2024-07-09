@@ -1,0 +1,72 @@
+==O/R==
+######
+##SCREENING FOR RED FLAGS (per eTG)
+######
+INFECTION:
+-Fevers
+-Immunosuppression
+-Penetrating wounds
+-IVDU 
+-Known infective diseases
+
+FRACTURE:
+-Significant trauma
+-Minor trauma in person aged
+-Known osteoporosis
+-Steroid use
+
+MALIGNANCY:
+-History of malignancy
+-Age>50
+-Failure to improve with treatment
+-Night sweats 
+-Fatigue
+-Unexplained weight loss
+-Pain at multiple sites
+-Pain at rest
+-Pain at night or waking at night 
+
+VISCERAL DISEASE (EG. PANCREATITIS, AORTIC ANEURYSM):
+-Sudden pain in abscess of trauma
+-Absence of pain aggravated by movement
+-Syncope or hypotension
+-Abdominal pain
+
+CAUDA EQUINA SYNDROME:
+-Altered bladder and/or bowel function
+-Saddle anaesthesia 
+-Foot or leg weakness 
+
+SPINAL CORD PATHOLOGY:
+-Decreased sensation in lower limbs
+-Weakness in lower limbs
+-Difficulty walking
+-Paraesthesia in lower limbs
+
+ANKYLOSING SPONDYLITIS:
+-Age<40
+-Duration >3 months
+-Prolonged morning stiffness
+-Night pain
+-Improvement with physical activity
+-Failure to improve with rest
+-Highly responsive to NSAIDs
+
+==O/E==
+Obs:
+Gait
+Observation C-spine, T-spine, L-spine, sacrum, coccyx
+Palpation:
+Sensation:
+Strength:
+
+######
+##ASSESSMENT FOR RED FLAGS:
+######
+-Sensory level
+-Sensory loss
+-Weakness in lower limb
+-Hyperreflexia or hyporeflexia
+-Plantar reflex
+
+ 
