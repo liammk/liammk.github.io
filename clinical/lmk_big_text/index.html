@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RDH Editable Progress Note</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #container {
+            width: 210mm;
+            height: 297mm;
+            position: relative;
+            margin: 0 auto;
+            page-break-after: always;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* This ensures the image fits within the container without distortion */
+        }
+        .editable-text {
+            position: absolute;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            outline: none;
+            min-width: 20px;
+            min-height: 20px;
+            max-width: calc(100% - 220px); /* Set max width to prevent overflow into margin */
+            line-height: 1.23; /* Adjust this value as needed for line spacing */
+            white-space: pre-wrap; /* Ensures that line breaks are respected */
+            word-wrap: break-word; /* Ensures words break to a new line to fit within the max-width */
+            font-family: Courier New, monospace;
+          font-size: 40px;
+        }
+        .editable-text:hover {
+            color: red;
+        }
+        .edit-button {
+            display: none;
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background-color: white;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .editable-text:hover .edit-button {
+            display: block;
+        }
+        @media print {
+            body, html {
+                width: 210mm;
+                height: 297mm;
+            }
+            #container {
+                page-break-before: always;
+                page-break-inside: avoid;
+                page-break-after: avoid;
+            }
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .editable-text {
+                border: none;
+                overflow: visible;
+                word-wrap: break-word;
+            }
+            .edit-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="container" onclick="placeInput(event)">
+    <img src="1.png" alt="Form Image"/>
+</div>
+
+<button onclick="printPage()">Print</button>
+
+<script>
+function placeInput(event) {
+    const container = document.getElementById('container');
+
+    // Track whether the user has started typing
+    let isTyping = false;
+
+    // Function to create a new editable text box
+    function createTextBox(x, y) {
+        const span = document.createElement("span");
+        span.contentEditable = true;
+        span.classList.add("editable-text");
+        span.style.left = `${x}px`;
+        span.style.top = `${y}px`;
+        container.appendChild(span);
+        span.focus();
+
+        // Once the user starts typing, allow arrow keys for cursor navigation
+        span.addEventListener("input", function() {
+            isTyping = true;
+        }, { once: true });
+
+        // Remove the span if it's empty on blur
+        span.addEventListener("blur", function() {
+            if (!span.innerText.trim()) {
+                span.remove();
+            }
+        });
+
+        // Handle arrow key navigation
+        span.addEventListener("keydown", function(event) {
+            if (isTyping) {
+                return; // Allow default behavior for typing
+            }
+
+            switch (event.key) {
+                case "ArrowLeft":
+                    span.style.left = `${parseFloat(span.style.left) - 1}px`;
+                    break;
+                case "ArrowRight":
+                    span.style.left = `${parseFloat(span.style.left) + 1}px`;
+                    break;
+                case "ArrowUp":
+                    span.style.top = `${parseFloat(span.style.top) - 1}px`;
+                    break;
+                case "ArrowDown":
+                    span.style.top = `${parseFloat(span.style.top) + 1}px`;
+                    break;
+            }
+        });
+
+        // Add click event listener for editing existing text
+        span.addEventListener("click", function(event) {
+            event.stopPropagation(); // Prevent the click event from reaching the container
+            isTyping = true;
+        });
+    }
+
+    // If clicking outside an existing editable text, reset typing flag
+    if (event.target.className !== "editable-text") {
+        isTyping = false;
+    }
+
+    // Create a new editable text box
+    const x = event.pageX - container.offsetLeft;
+    let y = event.pageY - container.offsetTop;
+    const lineHeightApprox = 20;
+    y -= lineHeightApprox;
+    if (y < 0) y = 0;
+
+    createTextBox(x, y);
+}
+
+function getCurrentDateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
+    const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    return `${date}\n${time}`;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const container = document.getElementById('container');
+
+    // Create the editable span for the current date and time
+    const dateTimeSpan = document.createElement("span");
+    dateTimeSpan.contentEditable = true;
+    dateTimeSpan.classList.add("editable-text");
+    dateTimeSpan.style.left = `70px`;
+    dateTimeSpan.style.top = `235px`;
+    dateTimeSpan.innerText = getCurrentDateTime(); // Set the initial text
+    container.appendChild(dateTimeSpan);
+    dateTimeSpan.focus();
+
+    // Handle blur event to remove if empty or finalize text
+    dateTimeSpan.addEventListener("blur", function() {
+        if (!dateTimeSpan.innerText.trim()) {
+            dateTimeSpan.remove(); // Remove span if it's empty
+        }
+    });
+
+    // Handle keydown events for line breaks and preventing new lines
+    dateTimeSpan.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent default Enter behavior
+            document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
+        }
+    });
+
+    // Add click event listener for editing existing text
+    dateTimeSpan.addEventListener("click", function() {
+        isTyping = true;
+        dateTimeSpan.contentEditable = true;
+        dateTimeSpan.focus();
+    });
+
+    // Create the editable span for the "LIAM MCBRIDE KELLY  - GEN SURG 3 INTERN - PAGER #1496" text
+    const liamSpan = document.createElement("span");
+    liamSpan.contentEditable = true;
+    liamSpan.classList.add("editable-text");
+    liamSpan.style.left = `165px`;
+    liamSpan.style.top = `235px`;
+    liamSpan.innerText = "LIAM MCBRIDE KELLY  - GOVE INTERN - PAGER #1496"; // Set the initial text
+    container.appendChild(liamSpan);
+    liamSpan.focus();
+
+    // Handle blur event to remove if empty or finalize text
+    liamSpan.addEventListener("blur", function() {
+        if (!liamSpan.innerText.trim()) {
+            liamSpan.remove(); // Remove span if it's empty
+        }
+    });
+
+    // Handle keydown events for line breaks and preventing new lines
+    liamSpan.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent default Enter behavior
+            document.execCommand('insertHTML', false, '<br><br>'); // Insert a double line break
+        }
+    });
+
+    // Add click event listener for editing existing text
+    liamSpan.addEventListener("click", function() {
+        isTyping = true;
+        liamSpan.contentEditable = true;
+        liamSpan.focus();
+    });
+});
+
+function editExistingText(span) {
+    span.contentEditable = true;
+    span.focus();
+}
+
+function printPage() {
+    document.querySelectorAll('.editable-text').forEach(function(span) {
+        span.removeAttribute('contenteditable');
+    });
+    window.print();
+    document.querySelectorAll('.editable-text').forEach(function(span) {
+        span.setAttribute('contenteditable', true);
+    });
+}
+</script>
+
+</body>
+</html>
