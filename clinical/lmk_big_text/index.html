@@ -36,6 +36,20 @@
             font-family: Courier New, monospace;
           font-size: 40px;
         }
+        .editable-text-small {
+            position: absolute;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            outline: none;
+            min-width: 20px;
+            min-height: 20px;
+            max-width: calc(100% - 220px); /* Set max width to prevent overflow into margin */
+            line-height: 1.23; /* Adjust this value as needed for line spacing */
+            white-space: pre-wrap; /* Ensures that line breaks are respected */
+            word-wrap: break-word; /* Ensures words break to a new line to fit within the max-width */
+            font-family: Courier New, monospace;
+        }
         .editable-text:hover {
             color: red;
         }
@@ -171,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Create the editable span for the current date and time
     const dateTimeSpan = document.createElement("span");
     dateTimeSpan.contentEditable = true;
-    dateTimeSpan.classList.add("editable-text");
+    dateTimeSpan.classList.add("editable-text-small");
     dateTimeSpan.style.left = `70px`;
     dateTimeSpan.style.top = `235px`;
     dateTimeSpan.innerText = getCurrentDateTime(); // Set the initial text
