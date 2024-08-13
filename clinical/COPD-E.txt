@@ -1,0 +1,38 @@
+==PC==
+SCREENING FOR COPD-E FEATURES:
+-increased dyspnoea
+-reduced exercise tolerance
+-tachypnoea
+-increased cough frequency
+-increased sputum volume or purulence
+-fever
+-right heart failure, manifesting as ankle oedema.
+
+SCREENING FOR COPD-E TRIGGERS:
+- viral and bacterial infections
+- environmental pollutants
+- heart failure
+- pulmonary embolism
+
+SCREENING FOR INDICATIONS FOR HOSPITAL ADMISSION:
+-inadequate response to ambulatory management
+-Excessively increased PRN use of salbutamol/ipratropium (e.g. using hourly)
+-inability to walk between rooms 
+-inability to eat or sleep because of dyspnoea
+-inability to manage at home 
+-altered mental status suggestive of hypercapnia
+-worsening hypoxaemia or cor pulmonale
+-worsening or new-onset central cyanosis
+-development of peripheral oedema
+-haemodynamic instability
+-acute respiratory failure
+-onset of new peripheral oedema
+
+==PLAN==
+) VBG – check pH, HCO3, CO2, K, lactate 
+) salbutamol 100 micrograms per puff, up to 8 puffs via pMDI with spacer, repeated as required
+) IF NOT ON LAMA AND SEVERE COPD-E -> ipratropium 21 micrograms per puff, up to 4 puffs via pMDI with spacer, repeated as required
+) IF INSUFFICIENT RESPONSE TO INHALED BRONCHODILATORS -> prednisolone 50 mg PO OD for 5 days
+) If SpO2<88%, start O2 therapy aiming SpO2 88-92%
+) If hypercapnic respiratory failure (PaCO2>45 & pH<7.35) despite optimal bronchodilator AND oxygen therapy -> consider NIV
+[NOTE: a VBG with a PvCO2<45 essentially excludes the possibility that on ABG the PaCO2 will be >45. So if on VBG PvCO2<45, hypercapnia is excluded. If on VBG PvCO2>45 then need to do ABG to confirm if truly hypercapnia. i.e. you are unlikely to more CO2 on the arterial side than the venous side. This seems to be largly true, though one meta-analysis did find that sometimes CO2 can be lower on the venous side than the arterial side – IDK how this is physiologically possible however https://litfl.com/vbg-versus-abg/]
